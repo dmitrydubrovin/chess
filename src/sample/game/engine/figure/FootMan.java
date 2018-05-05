@@ -57,6 +57,9 @@ public class FootMan extends Figure {
     }
 
     public boolean canMove0(int xto, int yto, Field field) {
+        if (xto == x && yto == y) {
+            return true;
+        }
         if (c == Color.WHITE) {
             if (!(xto == x - 1 || (start && xto == x - 2))) {
                 return false;
@@ -77,7 +80,7 @@ public class FootMan extends Figure {
             if (abs(yto - y) > 1) {
                 return false;
             }
-            if (yto == y){
+            if (yto == y) {
                 return field.space[xto][yto] == '1';
             }
             return field.space[xto][yto] != '1' &&

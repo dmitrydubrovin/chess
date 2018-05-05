@@ -8,6 +8,7 @@ import sample.view.*;
 import sample.game.engine.*;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
 public class Main extends Application {
@@ -15,8 +16,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws FileNotFoundException {
-        MainViewer mainViewer = new MainViewer();
-        Field f = new Field(new File("bigbattle.chess"));
+        Field f = new Field(new FileInputStream("field.chess"));
         GameViewer scene = new GameViewer(f);
         primaryStage.setTitle("Space chess");
         primaryStage.setScene(scene.scene);

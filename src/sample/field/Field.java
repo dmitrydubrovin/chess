@@ -12,7 +12,9 @@ import sample.game.engine.figure.*;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class Field extends Xform {
@@ -24,7 +26,7 @@ public class Field extends Xform {
     public int sx, sy;
     public GameController gc;
 
-    public Field(File map) throws FileNotFoundException {
+    public Field(InputStream map) throws FileNotFoundException {
         buildField(new Scanner(map));
     }
 
@@ -51,8 +53,8 @@ public class Field extends Xform {
             for (int z = 0; z < space[x].length; z++) {
                 if (space[x][z] != '0') {
                     addBox(x, z);
-                    int finalX = x;
-                    int finalZ = z;
+                    final int finalX = x;
+                    final int finalZ = z;
                     field[x][z].setOnMouseClicked(new EventHandler<MouseEvent>() {
                         @Override
                         public void handle(MouseEvent event) {
@@ -91,7 +93,7 @@ public class Field extends Xform {
                     Node cn = cur.toNode();
                     move(cn, x, z);
                     getChildren().addAll(cn);
-                    Figure finalCur = cur;
+                    final Figure finalCur = cur;
                     cn.setOnMouseClicked(new EventHandler<MouseEvent>() {
                         @Override
                         public void handle(MouseEvent event) {
@@ -132,8 +134,21 @@ public class Field extends Xform {
         figure.toNode().setTranslateZ(field[x][z].getTranslateZ());
         figures[figure.x][figure.y] = figure;
         if (figure instanceof FootMan) {
-            if (figure.c == Color.WHITE && (x == 0 || space[x - 1][z] == '0')) {
-                alert("Во что превратить пешку?", "Ферзь", "Конь", "Ладья", "Слон");
+            if ((figure.c == Color.WHITE && (x == 0 || space[x - 1][z] == '0')) ||
+                    (figure.c == Color.BLACk && (x == field.length - 1 || space[x + 1][z] == '0'))) {
+                Figure f = Figure.valueOf(x, z, figure.c, alert("Во что превратить пешку?", "Ферзь", "Конь", "Ладья", "Слон"));
+                getChildren().remove(figures[x][z].toNode());
+                f.toNode().setTranslateX(field[x][z].getTranslateX());
+                f.toNode().setTranslateZ(field[x][z].getTranslateZ());
+                figures[f.x][f.y] = f;
+                getChildren().add(f.toNode());
+                final Figure finalCur = f;
+                f.toNode().setOnMouseClicked(new EventHandler<MouseEvent>() {
+                    @Override
+                    public void handle(MouseEvent event) {
+                        onTap(finalCur.x, finalCur.y);
+                    }
+                });
             }
         }
     }
@@ -178,5 +193,17 @@ public class Field extends Xform {
         alert.getButtonTypes().clear();
         alert.getButtonTypes().addAll(types);
         return alert.showAndWait().get().getText();
+    }
+
+    @Override
+    public String toString() {
+        String res = "";
+        for (int i = 0; i < space.length; i++) {
+            for (int j = 0; j < space[i].length; j++) {
+                res += space[i][j];
+            }
+            res += "\n";
+        }
+        return res;
     }
 }
