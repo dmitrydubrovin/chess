@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.image.ImageView?>
+<GridPane xmlns="http://javafx.com/javafx"
+          xmlns:fx="http://javafx.com/fxml" hgap="10" vgap="15" alignment="center">
+    <Label GridPane.rowIndex="0" GridPane.columnIndex="0" style="
+     -fx-font-size: 12px;
+     -fx-font-weight: bold;
+     -fx-text-fill: #aaaaff;">Карта:
+    </Label>
+    <Label GridPane.rowIndex="0" GridPane.columnIndex="1" style="
+     -fx-font-size: 12px;
+     -fx-font-weight: bold;
+     -fx-text-fill: #aaaaff;">Стандартная Карта
+    </Label>
+    <Button GridPane.rowIndex="0" GridPane.columnIndex="2" style="-fx-base:#5555ff">Выбрать файл</Button>
+
+    <Label GridPane.rowIndex="1" GridPane.columnIndex="0" style="
+     -fx-font-size: 12px;
+     -fx-font-weight: bold;
+     -fx-text-fill: #aaaaff;">Условие победы:
+    </Label>
+    <ComboBox GridPane.rowIndex="1" GridPane.columnIndex="1" style="-fx-base:#5555ff"/>
+
+    <Label GridPane.rowIndex="3" GridPane.columnIndex="0" style="
+     -fx-font-size: 12px;
+     -fx-font-weight: bold;
+     -fx-text-fill: #aaaaff;">Порт:
+    </Label>
+    <TextField GridPane.rowIndex="3" GridPane.columnIndex="1" style="-fx-background-color: #5555ff"/>
+
+    <Label GridPane.rowIndex="2" GridPane.columnIndex="0" style="
+     -fx-font-size: 12px;
+     -fx-font-weight: bold;
+     -fx-text-fill: #aaaaff;">Стиль ваших фигур:
+    </Label>
+    <ComboBox GridPane.rowIndex="2" GridPane.columnIndex="1" style="-fx-base:#5555ff"/>
+
+    <Button GridPane.rowIndex="4" GridPane.columnIndex="0" style="-fx-base:#5555ff">Назад</Button>
+    <Button GridPane.rowIndex="4" GridPane.columnIndex="1" style="-fx-base:#5555ff">Открыть игру</Button>
+    <ImageView GridPane.rowIndex="4" GridPane.columnIndex="2"/>
+</GridPane>
